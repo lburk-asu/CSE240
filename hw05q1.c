@@ -178,21 +178,86 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
   if (findStudent(*studentName_input) != NULL) {
     return 0;
   } else {
+    struct studentRecord node;
     if (tempList == NULL)
     {
-      strcpy(tempList->studentName, studentName_input); //add name to head node
-      strcpy(tempList->major, major_input); //add major to head node
+      strcpy(node.studentName, studentName_input); //add name to head node
+      strcpy(node.major, major_input); //add major to head node
 
-      //convert schoolYear to enum and add
+      //convert schoolYear to enum and add to tempList
+      //Need to switch to if->else
+      // switch (*schoolYear_input)
+      // {
+      //   case "freshman":
+      //     node.schoolYear = freshman;
+      //     break;
+      //   case "sophomore":
+      //     node.schoolYear = sophomore;
+      //     break;
+      //   case "junior":
+      //     node.schoolYear = junior;
+      //     break;
+      //   case "senior";
+      //     node.schoolYear = senior;
+      //     break;
+      // }
+      if (strcmp(schoolYear_input, "freshman") == 0) 
+      {
+        node.schoolYear = freshman;
+      } 
+      else if (strcmp(schoolYear_input, "sophomore") == 0) 
+      {
+        node.schoolYear = sophomore;
+      } 
+      else if (strcmp(schoolYear_input, "junior") == 0) 
+      {
+        node.schoolYear = junior;
+      } 
+      else if (strcmp(schoolYear_input, "senior") == 0) 
+      {
+        node.schoolYear = senior;
+      }      
 
       //add ID
-      tempList->IDNumber = IDNumber_input;
+      node.IDNumber = IDNumber_input;
+      *tempList = node;
     }
-    struct studentRecord *iter = list;
-    while(iter->next != NULL){
-      //iterate to final node
-      //copy values to next node
+    else
+    {
+      struct studentRecord *iter = list;
+      while(iter->next != NULL)
+      {
+        //iterate to final node
+        iter = iter->next;
+        //copy values to next node
+      }
+      
+      strcpy(node.studentName, studentName_input); //add name to head node
+      strcpy(node.major, major_input); //add major to head node
+
+      if (strcmp(schoolYear_input, "freshman") == 0) 
+      {
+        node.schoolYear = freshman;
+      } 
+      else if (strcmp(schoolYear_input, "sophomore") == 0) 
+      {
+        node.schoolYear = sophomore;
+      } 
+      else if (strcmp(schoolYear_input, "junior") == 0) 
+      {
+        node.schoolYear = junior;
+      } 
+      else if (strcmp(schoolYear_input, "senior") == 0) 
+      {
+        node.schoolYear = senior;
+      }      
+
+      //add ID
+      node.IDNumber = IDNumber_input;
+      iter->next = &node;
     }
+    //TODO: need to sort list 
+    //TODO: incriment count
     return 1;
   }
 }
