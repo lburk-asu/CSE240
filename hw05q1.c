@@ -177,11 +177,11 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
 {
   struct studentRecord *tempList = list; // work on a copy of 'list'
 
-  //search through names already added for duplicates
+  //if student is already on the list, return 0
   if (findStudent(*studentName_input) != NULL) { 
     return 0; //if student exists, return 0
   } 
-  //If new student add to list
+  //else it's a new student, add to list, sort and return 1
   else {
     struct studentRecord *node = malloc(sizeof(struct studentRecord)); //create node   for data
     if (tempList == NULL) //if this is the first node
@@ -211,7 +211,7 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
       node->IDNumber = IDNumber_input; //add ID to node
       tempList = node; //set list pointer to the node address
     }
-    else
+    else //else add it to the end link
     {
       struct studentRecord *iter = tempList; //create iterator pointer
       while(iter->next != NULL)
@@ -221,9 +221,9 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
         //copy values to next node
       }
       
-      strcpy(node->studentName, studentName_input); //add name to head node
-      strcpy(node->major, major_input); //add major to head node
-
+      strcpy(node->studentName, studentName_input); //add name to node
+      strcpy(node->major, major_input); //add major to node
+      //convert to enum, add to node
       if (strcmp(schoolYear_input, "freshman") == 0) 
       {
         node->schoolYear = freshman;
@@ -241,8 +241,8 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
         node->schoolYear = senior;
       }      
 
-      node->IDNumber = IDNumber_input;
-      iter->next = node;
+      node->IDNumber = IDNumber_input; //add ID to node
+      iter->next = node; //link previous node to this node
 
       //find spot to insert tail
       //swap tail and insertee
@@ -251,7 +251,7 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
     }
     //TODO: need to sort tempList
     
-    list = tempList;
+    list = tempList; //Update list with the changes
     return 1;
   }
 }
@@ -264,8 +264,8 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
 // string for school year.
 void displayList() {
   struct studentRecord *tempList = list; // work on a copy of 'list'
-                                         // enter code here
-  struct studentRecord *iter = tempList;
+  
+  struct studentRecord *iter = tempList; //create iterator to traverse
   for(int i = 0; i < countNodes(); i++)
   {
     printf("\nStudent name is: %s", iter->studentName);
@@ -307,11 +307,11 @@ int countNodes() {
     while(iter->next != NULL) //if there is a next node
     {
       ++nodeAmt; //count it
-      iter = iter->next; //iterate to next
+      iter = iter->next; //iterate to next node
     }
   }
 
-  return nodeAmt; // edit this line as needed
+  return nodeAmt;
 }
 
 // Q4 : deleteNode (10 points)
