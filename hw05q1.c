@@ -182,8 +182,11 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
     {
       strcpy(tempList->studentName, studentName_input); //add name to head node
       strcpy(tempList->major, major_input); //add major to head node
-      //convert and add enum for year
+
+      //convert schoolYear to enum and add
+
       //add ID
+      tempList->IDNumber = IDNumber_input;
     }
     struct studentRecord *iter = list;
     while(iter->next != NULL){
