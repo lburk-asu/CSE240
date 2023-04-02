@@ -247,9 +247,20 @@ int addSort(char *studentName_input, char *major_input, char *schoolYear_input,
       //find spot to insert tail
       //swap tail and insertee
       //iterate to next, swap until end.
+      iter = iter->next; //point to last node
+      struct studentRecord *sortLocation = tempList;
+      while (sortLocation != iter)
+        {
+          if(strcmp(iter->studentName, sortLocation->studentName) < 0)
+          {
+            swapNodes(iter, sortLocation); 
+          }
+          sortLocation = sortLocation->next;
+        }
 
     }
     //TODO: need to sort tempList
+    
     
     list = tempList; //Update list with the changes
     return 1;
@@ -325,7 +336,8 @@ int countNodes() {
 
 int deleteNode(char *studentName_input) {
   struct studentRecord *tempList = list->next; // work on a copy of 'list'
-
+  struct studentRecord *rmPointer = findStudent(*studentName_input);
+  
   return 0; // edit this line as needed
 }
 
@@ -340,20 +352,22 @@ int deleteNode(char *studentName_input) {
 void swapNodes(struct studentRecord *node1, struct studentRecord *node2) 
 {
   struct studentRecord *tempNode = malloc(sizeof(struct studentRecord)); //create node for data
-  //copy from node1 into tempNode
-  strcpy(node1->studentName, tempNode->studentName);
-  strcpy(node1->major, tempNode->major);
-  tempNode->schoolYear = node1->schoolYear;
-  tempNode->IDNumber = node1->IDNumber;
-  //copy from node2 into node1
-  strcpy(node2->studentName, node1->studentName);
-  strcpy(node2->major, node1->major);
-  node1->schoolYear = node2->schoolYear;
-  node1->IDNumber = node2->IDNumber;
   //copy from tempNode into node 2
   strcpy(tempNode->studentName, node2->studentName);
   strcpy(tempNode->major, node2->major);
   node2->schoolYear = tempNode->schoolYear;
   node2->IDNumber = tempNode->IDNumber;
+  //copy from node2 into node1
+  strcpy(node2->studentName, node1->studentName);
+  strcpy(node2->major, node1->major);
+  node1->schoolYear = node2->schoolYear;
+  node1->IDNumber = node2->IDNumber;
+  //copy from node1 into tempNode
+  strcpy(node1->studentName, tempNode->studentName);
+  strcpy(node1->major, tempNode->major);
+  tempNode->schoolYear = node1->schoolYear;
+  tempNode->IDNumber = node1->IDNumber;
+
+
   free(tempNode);
 }
