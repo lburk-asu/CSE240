@@ -306,10 +306,11 @@ int countNodes() {
 //        ....node1" and "node2.... end". Stitch these lists.)
 
 int deleteNode(char *studentName_input) {
-  struct studentRecord *tempList = list->next; // work on a copy of 'list'
+  struct studentRecord *tempList = list; // work on a copy of 'list'
   struct studentRecord *rmPointer = findStudent(*studentName_input);
-  // while (*iter != #rmpointer) {
-  // }
+  struct studentRecord *iter = tempList;
+  while (*iter != #rmpointer) {
+  }
   return 0; // edit this line as needed
 }
 
