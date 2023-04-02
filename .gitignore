@@ -1,9 +1,10 @@
 /.replit
 /.breakpoints
-.ccls-cache/
+./.ccls-cache/
 /hw05q1.exe
 /hw05q1
 .exe
-/main
+./main
 /Makefile
 /replit.nix
+main
