@@ -308,8 +308,8 @@ int countNodes() {
 int deleteNode(char *studentName_input) {
   struct studentRecord *tempList = list->next; // work on a copy of 'list'
   struct studentRecord *rmPointer = findStudent(*studentName_input);
-  while (*iter != #rmpointer) {
-  }
+  // while (*iter != #rmpointer) {
+  // }
   return 0; // edit this line as needed
 }
 
