@@ -309,7 +309,7 @@ int deleteNode(char *studentName_input) {
   struct studentRecord *tempList = list; // work on a copy of 'list'
   struct studentRecord *rmPointer = findStudent(*studentName_input);
   struct studentRecord *iter = tempList;
-  while (*iter != #rmpointer) {
+  while (*iter != *rmpointer) {
   }
   return 0; // edit this line as needed
 }
