@@ -1,6 +1,14 @@
-// CSE240
-// Be sure to add the standard header above.
-// Write the compiler used: Visual studio or gcc (SELECT ONE AND INDICATE)
+/** CSE240 Homework 5
+ * This program creates a linked list of student records. The point of this assignment is to practice implimenting 
+ * c functions that manipulate linked lists.
+ * 
+ * Completion time: 5 Hours
+ * 
+ * @author Lee Burk ID# 1220296025
+ * @version 02APR2023
+ * IDE: GCC
+ * 
+*/
 
 // READ BEFORE YOU START:
 // You are given a partially completed program that creates a linked list of
@@ -306,11 +314,35 @@ int countNodes() {
 //        ....node1" and "node2.... end". Stitch these lists.)
 
 int deleteNode(char *studentName_input) {
+  if (list == NULL) // if list is empty
+  {
+    return 2; //return 2 to print empty list message
+  }
   struct studentRecord *tempList = list->next; // work on a copy of 'list'
-  struct studentRecord *rmPointer = findStudent(*studentName_input);
-  // while (*iter != #rmpointer) {
-  // }
-  return 0; // edit this line as needed
+  struct studentRecord *iter = tempList;
+  struct studentRecord *prev = list;
+  if(findStudent(*studentName_input) != NULL) // if student does not exist
+  {
+    
+    return 0; // return 0 to print student not found message
+  }
+  else {
+    if (strcmp(list->studentName, studentName_input) == 0) { // if head is to be deleted
+      free(list);
+      list = tempList; // Update list with the changes
+      return 1;
+    }
+    while (iter != NULL) {
+      if (strcmp(iter->studentName, studentName_input) == 0) { // if node is to be deleted
+        prev->next = iter->next; // stitch list
+        free(iter);
+        return 1;
+      }
+      // iterate to next node
+      prev = iter;
+      iter = iter->next;
+    }
+  }
 }
 
 // Q5 : swapNodes (5 points)
