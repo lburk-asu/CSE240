@@ -1,6 +1,6 @@
 /.replit
 /.breakpoints
-.ccls-cache/
+/.ccls-cache/*
 /hw05q1.exe
 /hw05q1
 .exe
@@ -9,4 +9,5 @@
 /replit.nix
 main
 /main
-.blob
+*.blob
+*.ccls-cache/
